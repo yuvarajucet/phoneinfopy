@@ -147,7 +147,7 @@ def validate_OTP(phoneNumber, OTP, requestId, isCLI = False):
 
 def get_phone_info(phoeNumber, countryCode, authToken, isCLI = False):
     if authToken == None and isCLI:
-        if os.path.exists(os.getcwd() + ".token.txt"):
+        if os.path.exists(os.getcwd() + "/.token.txt"):
             with open(".token.txt", "r") as file:
                 data = file.read()
                 authToken = data
