@@ -150,7 +150,7 @@ def get_phone_info(phoeNumber, countryCode, authToken, isCLI = False):
         if os.path.exists(os.getcwd() + "/.token.txt"):
             with open(".token.txt", "r") as file:
                 data = file.read()
-                authToken = data
+                authToken = data.replace("\n", "")
         else:
             print("[-] Please Login and try again!")
             return 0
