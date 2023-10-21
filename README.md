@@ -46,7 +46,7 @@ python3 -m phoneinfopy.cli -c +91 -l 98xxxxxxxx
 ## search-Number
 You can search phone number by using below command
 ```bash
-python3 -m phoneinfo.cli -c +91 -i 98xxxxxxxx
+python3 -m phoneinfopy.cli -c +91 -i 98xxxxxxxx
 ```
 
 ## Module-usage
