@@ -39,14 +39,14 @@
                 {
                     "id": "f2167800-5d54-4003-a068-b0650827d3ba",
                     "frequency": 3600,
-                    "passthroughData": "eyAiNCI6ICJ1Z2MiLCAiNSI6ICIyMDIyMTAxMCIsICI4IjogIjEiLCAiMiI6ICJZdXZhcmFqIFZlbm1hbml5YXRodXIiLCAiMyI6ICIzIiB9",
+                    "passthroughData": "eyAiMiI6ICJZdXZhcmFqIFZlbm1hbml5YXRodXIiLCAiOCI6ICIxIiwgIjMiOiAiMyIsICI0IjogInVnYyIsICI1IjogIjIwMjIxMDEwIiB9",
                     "perNumberCooldown": 31536000,
                     "dynamicContentAccessKey": ""
                 },
                 {
                     "id": "5eb00bc9-ff01-4e8d-b2e8-1bd726ab1c89",
                     "frequency": 3600,
-                    "passthroughData": "eyAiNCI6ICJ1Z2MiLCAiNSI6ICIyMDIyMTAxMCIsICI4IjogIjEiLCAiMiI6ICJZdXZhcmFqIFZlbm1hbml5YXRodXIiLCAiMyI6ICIzIiB9",
+                    "passthroughData": "eyAiMiI6ICJZdXZhcmFqIFZlbm1hbml5YXRodXIiLCAiOCI6ICIxIiwgIjMiOiAiMyIsICI0IjogInVnYyIsICI1IjogIjIwMjIxMDEwIiB9",
                     "perNumberCooldown": 31536000,
                     "dynamicContentAccessKey": ""
                 }
