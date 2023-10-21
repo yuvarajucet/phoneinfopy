@@ -3,6 +3,7 @@ from pprint import pprint
 import json
 import random
 import argparse
+import os
 
 def main():
     parser = argparse.ArgumentParser(usage="\n Phoneinfo.py -i [number] (Command to search phone number)")
@@ -37,33 +38,42 @@ def register_phone_number(phoneNumber, isCLI = False):
 
     try:
         response = requests.post('https://account-asia-south1.truecaller.com/v2/sendOnboardingOtp', headers=headers, json=json)
-        requestId = response.json()["requestId"]
-        if not isCLI:
-            if response.json()['status'] == 1 or response.json()['status'] == 9:
-                return {
-                    "status": True,
-                    "message": f"Sent an OTP for {phoneNumber}",
-                    "requestId": requestId
-                }
+        if response.status_code == 200:
+            requestId = response.json()["requestId"]
+            if not isCLI:
+                if response.json()['status'] == 1 or response.json()['status'] == 9:
+                    return {
+                        "status": True,
+                        "message": f"Sent an OTP for {phoneNumber}",
+                        "requestId": requestId
+                    }
+                else:
+                    return {
+                        "status": False,
+                        "message": response.json()['message'],
+                        "requestId": None
+                    }
+            #  For CLI users
+            else:
+                if response.json()['status'] == 1 or response.json()['status'] == 9:
+                    otp = str(input("\n[+] Please Enter OTP ==>  : "))
+                    otp_validate_status = validate_OTP(phoneNumber, otp, requestId, True)
+                    if otp_validate_status:
+                        pass
+                    else:
+                        print("\n[-] Please try again!")
+
+                else:
+                    print("\n [-] Failed to sent OTP!\n [-] Reason: "+ response.json()["message"])
+        else:
+            if isCLI:
+                print("\n[-] Something went wrong!")
             else:
                 return {
                     "status": False,
-                    "message": response.json()['message'],
+                    "message": "request not statisfied, status_code => " + str(response.status_code),
                     "requestId": None
                 }
-        #  For CLI users
-        else:
-            if response.json()['status'] == 1 or response.json()['status'] == 9:
-                otp = str(input("\n[+] Please Enter OTP ==>  : "))
-                otp_validate_status = validate_OTP(phoneNumber, otp, requestId, True)
-                if otp_validate_status:
-                    pass
-                else:
-                    print("\n[-] Please try again!")
-
-            else:
-                print("\n [-] Failed to sent OTP!\n [-] Reason: "+ response.json()["message"])
-
     except Exception as ex:
         if not isCLI:
             return {
@@ -114,7 +124,7 @@ def validate_OTP(phoneNumber, OTP, requestId, isCLI = False):
                 }
         else:
             if isCLI:
-                with open(".token", "w") as file:
+                with open(".token.txt", "w") as file:
                     file.write(response.json()["installationId"])
                 print("\n[+] Validation success!")
                 return True
@@ -137,9 +147,13 @@ def validate_OTP(phoneNumber, OTP, requestId, isCLI = False):
 
 def get_phone_info(phoeNumber, countryCode, authToken, isCLI = False):
     if authToken == None and isCLI:
-        with open(".token", "r") as file:
-            data = file.read()
-            authToken = data
+        if os.path.exists(os.getcwd() + ".token.txt"):
+            with open(".token.txt", "r") as file:
+                data = file.read()
+                authToken = data
+        else:
+            print("[-] Please Login and try again!")
+            return 0
 
     if authToken == None or authToken == "":
         print("[-] Please Login and try again!")
@@ -182,9 +196,9 @@ def get_phone_info(phoeNumber, countryCode, authToken, isCLI = False):
             if response.json().get('status'):
                 print("\n[+] Failed to get user data")
             else:
-                with open(".data","w") as file:
+                with open(".data.txt","w") as file:
                     json.dump(response.json(), file, indent=4)
-                with open(".data", "r") as file:
+                with open(".data.txt", "r") as file:
                     data = json.load(file)
                 pprint(data)
 
