@@ -6,13 +6,13 @@ PhoneInfopy is a python tool to directly make request to Truecaller API's and ge
 - [PhoneInfoPy](#PhoneInfoPy)
     - [Requirements](#requirements)
     - [Command Line Usage](#Command-line)
-        - [Installation](#Install)
+        - [Installation](#Installation)
         - [Login](#Login)
         - [Search Number](#search-number)
     - [Module usage](#Module-usage)
-        - [Installation](#install)
-        - [Register](#register)
-        - [Validate OTP](#OTP-validation)
+        - [Installation](#Install)
+        - [Register](#Register)
+        - [Validate OTP](#Validate-OTP)
         - [Search phone number](#Search-number)
 
 ## Requirements
@@ -21,7 +21,7 @@ To use PhoneInfopy module you need below pre requirements.
 - python
 - truecaller auth token [This token will get by login/register process]
 
-## Command Line usage
+## Command Line Usage
 You can install PhoneInfopy package using pip
 
 - `phoneinfopy -h [--help]` for help
@@ -36,20 +36,22 @@ pip install phoneinfopy
 
 ### Login
 ```bash
-phoneinfopy -c <countryCode> -l <phoneNumber>
+python3 -m phoneinfopy.cli -c <countryCode> -l <phoneNumber>
 ```
 #### Example
 ```bash
-phoneinfopy -c +91 -l 98xxxxxxxx
+python3 -m phoneinfopy.cli -c +91 -l 98xxxxxxxx
 ```
 
-## Search Number
+## search-Number
 You can search phone number by using below command
 ```bash
-phoneinfo -c +91 -i 98xxxxxxxx
+python3 -m phoneinfo.cli -c +91 -i 98xxxxxxxx
 ```
 
-## Module usage:
+## Module-usage
+
+### Install
 You can install the phoneinfopy moudle using pip:
 ```bash
 pip install phoneinfopy
@@ -71,7 +73,7 @@ response = register_phone_number(number)
 # }
 ```
 
-## Validate OTP:
+## Validate-OTP:
 Once you get success response from register method next you need to verify the OTP to get access token.
 
 
@@ -91,7 +93,7 @@ response = validate_OTP(number, OTP, requestId)
 # }
 ```
 
-## Search Phone Number
+## Search-number
 You need to get user information using phone number you can use like this..
 ```python
 from phoneinfopy import get_phone_info

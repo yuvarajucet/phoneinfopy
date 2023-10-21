@@ -1,5 +1,3 @@
-#!/usr/bin/pytho3 
-
 import requests
 from pprint import pprint
 import json
@@ -116,7 +114,6 @@ def validate_OTP(phoneNumber, OTP, requestId, isCLI = False):
                 }
         else:
             if isCLI:
-                print(response.json())
                 with open(".token", "w") as file:
                     file.write(response.json()["installationId"])
                 print("\n[+] Validation success!")
@@ -146,7 +143,7 @@ def get_phone_info(phoeNumber, countryCode, authToken, isCLI = False):
 
     if authToken == None or authToken == "":
         print("[-] Please Login and try again!")
-        exit(0)
+        return 0
 
     params = {
         'q':phoeNumber,
